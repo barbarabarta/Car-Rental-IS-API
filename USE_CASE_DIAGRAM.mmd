@@ -1,0 +1,9 @@
+flowchart LR
+ E[Rental Employee] --> C([Create Rental])
+ E --> V([View Rental])
+ E --> M([View Customers, Cars and Insurance])
+ C -. "include" .-> A([Check Car Availability])
+ C -. "include" .-> D([Validate Rental Period])
+ C -. "include" .-> P([Calculate Total Price])
+ P -. "include" .-> G([Calculate Customer Age])
+ S([Apply Young Driver Surcharge]) -. "extend: age < 23" .-> P

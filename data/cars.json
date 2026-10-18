@@ -1,0 +1,14 @@
+[
+  {
+    "license_plate": "BE123456",
+    "type": "Compact",
+    "colour": "Blue",
+    "daily_price": 75.0
+  },
+  {
+    "license_plate": "BE654321",
+    "type": "SUV",
+    "colour": "Black",
+    "daily_price": 120.0
+  }
+]

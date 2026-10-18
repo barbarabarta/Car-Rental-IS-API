@@ -1,0 +1,34 @@
+classDiagram
+class Customer {
+ +int customer_id
+ +str name
+ +str phone
+ +str licence_no
+ +date date_of_birth
+ +calculate_age(on_date) int
+}
+class Car {
+ +str license_plate
+ +str type
+ +str colour
+ +Decimal daily_price
+ +is_available(start_date,end_date,rentals) bool
+}
+class Insurance {
+ +int insurance_id
+ +str insurance_type
+ +Decimal daily_cost
+}
+class Rental {
+ +int rental_id
+ +date start_date
+ +date end_date
+ +validate_rental_period() bool
+ +calculate_rental_days() int
+ +apply_young_driver_surcharge() Decimal
+ +calculate_total_price() Decimal
+ +to_record() dict
+}
+Customer "1" --> "0..*" Rental : makes
+Car "1" --> "0..*" Rental : used in
+Insurance "1" --> "0..*" Rental : selected for

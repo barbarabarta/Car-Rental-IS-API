@@ -1,0 +1,9 @@
+# Keep fictional teaching data; exclude local environments and private files.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,12 @@
+[
+  {
+    "insurance_id": 1,
+    "insurance_type": "Simple",
+    "daily_cost": 10.0
+  },
+  {
+    "insurance_id": 2,
+    "insurance_type": "Extra",
+    "daily_cost": 20.0
+  }
+]
