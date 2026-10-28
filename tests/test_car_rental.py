@@ -13,6 +13,7 @@ class CarRentalTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.data = Path(self.temp.name) / "data"
         shutil.copytree(Path(__file__).resolve().parents[1] / "data", self.data)
+        (self.data / "rentals.json").write_text("[]\n", encoding="utf-8")
         self.patcher = patch.object(storage, "DATA_DIR", self.data)
         self.patcher.start()
         self.addCleanup(self.patcher.stop)
