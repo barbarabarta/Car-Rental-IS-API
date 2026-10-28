@@ -74,6 +74,19 @@ To reset the demonstration, replace the contents of `data/rentals.json` with `[]
 python -m pip install -r requirements-test.txt
 python -m unittest discover -s tests -v
 ```
+### Testing and verification results
+
+The application was manually tested in GitHub Codespaces on 28 October 2026 using the Swagger UI (`/docs`).
+
+- **Application startup:** Successful; Swagger UI opened correctly.
+- **Automated tests:** All 5 tests passed (`Ran 5 tests – OK`).
+- **Successful rental creation:** POST `/rentals` returned HTTP 201. Rental ID 1 was created for customer 2 and car BE123456, from 2026-11-01 to 2026-11-04.
+- **Price calculation:** 3 rental days, CHF 50 young driver surcharge, total CHF 305.
+- **Rejected overlapping rental:** POST `/rentals` for the same car from 2026-11-03 to 2026-11-06 returned HTTP 409 Conflict.
+- **Data persistence:** GET `/rentals` returned HTTP 200 and showed the saved rental.
+- **Test isolation improvement:** The test setup now resets the temporary rentals file before each test, preventing demo bookings from affecting automated test results.
+
+The application uses fictional data. These results were observed during testing, not merely assumed.
 
 ## Mapping models to implementation
 - ER Customer / Car / Insurance / Rental → `domain.py` classes and matching JSON files.
@@ -81,13 +94,25 @@ python -m unittest discover -s tests -v
 - Derived Age → `Customer.calculate_age()`; derived Total Price → `Rental.calculate_total_price()`.
 - UML Create Rental → `POST /rentals`; invalid period and car conflict → HTTP 400 / 409.
 
+### UML diagrams
+
+- [Use Case Diagram](USE_CASE_DIAGRAM.mmd)
+- [Class Diagram](CLASS_DIAGRAM.mmd)
+
 ## Limitations
 No authentication, payment, customer self-service, cancellation, concurrent-write protection or relational database. Only `POST /rentals` writes data. Existing rentals keep calculated prices but the system does not snapshot all underlying rate details. Use only fictional data.
 
 ## Group members and contributions
-- [Member 1]: [Contribution]
-- [Member 2]: [Contribution]
-- [Member 3, if applicable]: [Contribution]
+- **Olivia Pécoud** – Collaborative development, testing, documentation, and project review.
+- **Barbara Barta** – Collaborative development, testing, documentation, and project review.
+- **Gian-Carlo Zimmermann** – Collaborative development, testing, documentation, and project review.
+- **Michal Selecky** – Collaborative development, testing, documentation, and project review.
+
+All four group members contributed equally to the project through teamwork, discussions, implementation, testing, and documentation.
 
 ## AI use and verification
-Document the actual AI tool/prompt used, inspect generated functions, run the tests and record real outputs and corrections in the report. Do not describe expected output as actual execution evidence.
+AI tools, including ChatGPT (OpenAI) and Claude (Anthropic), were used by group members as supporting resources during the project. ChatGPT was used for code review, troubleshooting, test analysis, and documentation improvements. Claude was also used by some group members; its specific use cases have not been documented.
+AI-assisted suggestions were reviewed and checked against the project's implementation. The application was successfully started in GitHub Codespaces, and the API was tested using Swagger UI (`/docs`).
+All five automated tests passed. Manual testing confirmed successful rental creation (HTTP 201), rejection of overlapping bookings (HTTP 409), and retrieval of saved rental data (HTTP 200).
+During verification, a test-data dependency was identified and corrected by resetting the temporary rentals file before each test. All five automated tests passed again after the correction.
+The reported test results are based on actual execution rather than assumed or AI-generated outcomes.
