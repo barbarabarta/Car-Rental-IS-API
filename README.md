@@ -8,7 +8,7 @@ A rental employee creates a rental linking one **Customer**, one **Car** and one
 ## Business rules and assumptions
 - Rental end date is **exclusive**. Days = end date − start date; end date must be later than start date.
 - Customer age is evaluated **on the rental start date**. Customers must be at least 18 (additional prototype assumption).
-- Under age 23: **CHF 50 fixed surcharge per rental** (proposed assumption; confirm with group).
+- Customers under the age of 23 are charged a fixed young driver surcharge of CHF 50 per rental (prototype assumption).
 - Total = days × (car daily price + insurance daily cost) + surcharge.
 - The same car cannot have overlapping rental periods; back-to-back rentals are allowed.
 - Price fields are computed on creation and stored in the rental JSON. Price changes, concurrency and transaction handling are outside prototype scope.
